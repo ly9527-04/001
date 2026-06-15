@@ -1,0 +1,6 @@
+node_modules/
+qa-box.db
+.env.local
+.env
+ngrok.zip
+*.tmp
