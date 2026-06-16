@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ly的提问箱</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- ═══ Header ═══ -->
+  <header class="header">
+    <div class="header-inner">
+      <h1><span class="icon">◆</span>ly的提问箱</h1>
+      <p class="subtitle">// ASK_ANYTHING · STAY_ANONYMOUS</p>
+      <a href="/admin" class="nav-link" style="font-size:0.8rem;">[ ADMIN_ACCESS ] →</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ═══ Submit Card ═══ -->
+    <div class="card" id="submitCard">
+      <div class="card-title">📝 写点什么吧</div>
+
+      <div class="form-group">
+        <label><span class="emoji">🏷️</span>分类标签</label>
+        <div class="category-pills" id="catPills">
+          <button class="cat-pill active" data-cat="学习" onclick="selectCat('学习', this)">📚 学习</button>
+          <button class="cat-pill" data-cat="生活" onclick="selectCat('生活', this)">🌟 生活</button>
+          <button class="cat-pill" data-cat="情感" onclick="selectCat('情感', this)">💕 情感</button>
+          <button class="cat-pill" data-cat="工作" onclick="selectCat('工作', this)">💼 工作</button>
+          <button class="cat-pill" data-cat="游戏" onclick="selectCat('游戏', this)">🎮 游戏</button>
+          <button class="cat-pill" data-cat="吐槽" onclick="selectCat('吐槽', this)">💢 吐槽</button>
+          <button class="cat-pill" data-cat="其他" onclick="selectCat('其他', this)">📌 其他</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nickname"><span class="emoji">👤</span>昵称（留空则显示"匿名"）</label>
+        <input type="text" id="nickname" placeholder="给自己取个代号吧~" maxlength="20">
+      </div>
+
+      <div class="form-group">
+        <label for="content"><span class="emoji">💬</span>你的问题或吐槽</label>
+        <textarea id="content" placeholder="在这里写下你想说的话…" maxlength="500"></textarea>
+        <div class="char-count" id="charCount">0 / 500</div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="emoji">🔒</span>防刷屏验证码</label>
+        <div class="password-row">
+          <input type="password" id="submitPwd" placeholder="请输入验证码" maxlength="10" autocomplete="off">
+          <span class="password-hint">💡 提示：四位数字</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="submitQuestion()">
+        ⚡ SEND_MESSAGE
+      </button>
+    </div>
+
+    <!-- ═══ Filter Bar ═══ -->
+    <div class="filter-bar">
+      <select id="filterCat" onchange="loadQuestions(1)">
+        <option value="all">🏷️ 全部分类</option>
+        <option value="学习">📚 学习</option>
+        <option value="生活">🌟 生活</option>
+        <option value="情感">💕 情感</option>
+        <option value="工作">💼 工作</option>
+        <option value="游戏">🎮 游戏</option>
+        <option value="吐槽">💢 吐槽</option>
+        <option value="其他">📌 其他</option>
+      </select>
+      <select id="filterSort" onchange="loadQuestions(1)">
+        <option value="newest">🕐 最新优先</option>
+        <option value="replied">💬 已回复优先</option>
+      </select>
+      <button class="btn btn-outline btn-sm" onclick="loadQuestions(1)">🔄 刷新</button>
+    </div>
+
+    <!-- ═══ Question List ═══ -->
+    <div id="questionList"></div>
+
+    <!-- ═══ Pagination ═══ -->
+    <div class="pagination" id="pagination"></div>
+
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer">
+    <span>ly</span> 的提问箱 · 每一条留言都是一颗星 · 今晚夜色真美
+  </footer>
+
+  <!-- ═══ Toast Container ═══ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

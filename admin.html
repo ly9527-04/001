@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ly的提问箱 · 管理后台</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- ═══ Header ═══ -->
+  <header class="header">
+    <div class="header-inner">
+      <h1><span class="icon">◆</span>ly的提问箱</h1>
+      <p class="subtitle" id="adminTitle">// ADMIN_CONSOLE</p>
+      <a href="/" class="nav-link" id="backLink">[ ← BACK ]</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ═══ Login Card ═══ -->
+    <div class="card login-card" id="loginCard">
+      <div class="card-title">[ AUTH_REQUIRED ]</div>
+      <div class="form-group">
+        <label for="username">👤 用户名</label>
+        <input type="text" id="username" placeholder="请输入用户名">
+      </div>
+      <div class="form-group">
+        <label for="password">🔒 密码</label>
+        <input type="password" id="password" placeholder="请输入密码">
+      </div>
+      <button class="btn btn-primary btn-block" onclick="adminLogin()">⚡ AUTHENTICATE</button>
+    </div>
+
+    <!-- ═══ Admin Panel (hidden by default) ═══ -->
+    <div id="adminPanel" style="display:none;">
+
+      <!-- Toolbar -->
+      <div class="admin-toolbar">
+        <select id="adminFilterCat" onchange="loadAdminQuestions(1)">
+          <option value="all">🏷️ 全部分类</option>
+          <option value="学习">📚 学习</option>
+          <option value="生活">🌟 生活</option>
+          <option value="情感">💕 情感</option>
+          <option value="工作">💼 工作</option>
+          <option value="游戏">🎮 游戏</option>
+          <option value="吐槽">💢 吐槽</option>
+          <option value="其他">📌 其他</option>
+        </select>
+        <select id="adminFilterStatus" onchange="loadAdminQuestions(1)">
+          <option value="all">📋 全部状态</option>
+          <option value="unreplied">🆕 待回复</option>
+          <option value="replied">✅ 已回复</option>
+        </select>
+        <span class="spacer"></span>
+        <button class="btn btn-outline btn-sm" onclick="loadAdminQuestions(1)">🔄 刷新</button>
+        <button class="btn btn-danger btn-sm" onclick="adminLogout()">🚪 退出</button>
+      </div>
+
+      <!-- Question List -->
+      <div id="adminQuestionList"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="adminPagination"></div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <span>ly</span> 的提问箱 · 管理终端
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
