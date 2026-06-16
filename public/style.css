@@ -2,7 +2,9 @@
    ly的提问箱 — 赛博朋克 / 科技感主题
    ═══════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Share+Tech+Mono&display=swap');
+/* 使用系统字体，国内无需加载 Google Fonts */
+/* Noto Sans SC → PingFang / Microsoft YaHei 替代 */
+/* Share Tech Mono → Consolas / Courier New 替代 */
 
 :root {
   /* 🌃 暗色基底 + 霓虹配色 */
@@ -35,8 +37,8 @@
   --radius:        8px;
   --radius-sm:     6px;
 
-  --font:          'Noto Sans SC', -apple-system, sans-serif;
-  --font-mono:     'Share Tech Mono', 'Consolas', monospace;
+  --font:          'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', -apple-system, sans-serif;
+  --font-mono:     'SF Mono', 'Consolas', 'Courier New', monospace;
 }
 
 /* ── Reset ────────────────────────────────────────────── */
