@@ -2,9 +2,6 @@
   "name": "ly-qa-box",
   "version": "1.0.0",
   "description": "ly的提问箱",
-  "scripts": {
-    "build": ""
-  },
   "type": "commonjs",
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
