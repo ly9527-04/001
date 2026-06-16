@@ -215,7 +215,7 @@ async function doReply(id) {
   if (reply.length > 500) return showToast('回复太长啦，最多500字', 'error');
 
   try {
-    const res = await fetch(`/api/admin/reply/${id}`, {
+    const res = await fetch(`/api/admin/questions/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
