@@ -1,34 +1,28 @@
 /* ═══════════════════════════════════════════════════════
-   GET /api/health → 检查数据库连接状态
+   GET /api/health → 调试信息
    ═══════════════════════════════════════════════════════ */
 
-const { sql, ensureTables } = require('../lib/db.js');
+const { ensureTables } = require('../lib/db.js');
 
 module.exports = async function handler(req, res) {
   const info = {
-    status: 'checking',
-    database: 'unknown',
-    env: 'unknown',
+    runtime: 'Node.js ' + process.version,
+    envKeys: Object.keys(process.env)
+      .filter(k => k.includes('URL') || k.includes('POSTGRES') || k.includes('DATABASE') || k.includes('NEON') || k.includes('VERCEL'))
+      .map(k => ({ key: k, value: process.env[k] ? '***set***' : 'empty' })),
+    db: 'unknown',
   };
 
-  // 检查环境变量
-  info.env = {
-    DATABASE_URL: !!process.env.DATABASE_URL,
-    POSTGRES_URL: !!process.env.POSTGRES_URL,
-    POSTGRES_URL_NON_POOLING: !!process.env.POSTGRES_URL_NON_POOLING,
-  };
-
-  // 检查数据库
   try {
     await ensureTables();
+    const { sql } = require('../lib/db.js');
     const rows = await sql`SELECT COUNT(*) as count FROM questions`;
-    info.status = 'ok';
-    info.database = 'connected';
+    info.db = 'connected';
     info.questionCount = rows[0]?.count || 0;
+    info.status = 'ok';
   } catch (err) {
+    info.db = 'error: ' + err.message;
     info.status = 'error';
-    info.database = 'disconnected';
-    info.error = err.message;
   }
 
   return res.json(info);
